@@ -1,6 +1,7 @@
 #include "log.hpp"
+#include <map>
 
-namespace sylar {
+namespace aspect {
 	const char* LogLevel::ToString(LogLevel::Level level)
 	{
 		/*
@@ -96,19 +97,19 @@ namespace sylar {
 		m_filestream.open(m_filename);
 		return !!m_filestream; // !!操作后，0依旧是0，其他都为1
 	}
-	void FileLogAppender::log(LogLevel::Level level, LogEvent::ptr event) {
-		m_filestream << m_formatter->format(event);
+	void FileLogAppender::log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event) {
+		m_filestream << m_formatter->format(level,logger,event);
 	}
 
 
-	void StdoutLogAppender::log(LogLevel::Level level, LogEvent::ptr event) {
-		std::cout << m_formatter->format(event);
+	void StdoutLogAppender::log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event) {
+		std::cout << m_formatter->format(level,logger,event);
 	}
 	
 	//formatter
 	LogFormatter::LogFormatter(const std::string& pattern) :m_pattern(pattern){}
 
-	std::string LogFormatter::format(LogEvent::ptr event) {
+	std::string LogFormatter::format(LogLevel::Level level, std::shared_ptr<Logger> logger,LogEvent::ptr event) {
 
 	}
 
@@ -155,7 +156,7 @@ namespace sylar {
 			if (fmt_status == 0)
 			{
 				if (!nstr.empty()) {
-					vec.push_back(std::make_pair(nstr, "", 0));
+					vec.push_back(std::make_tuple(nstr, "", 0));
 				}
 				str = m_pattern.substr(i + 1, n - i - 1);
 				vec.push_back(std::make_tuple(str, fmt, i));
@@ -168,18 +169,50 @@ namespace sylar {
 			else if (fmt_status == 2)
 			{
 				if (!nstr.empty()) {
-					vec.push_back(std::make_pair(nstr, "", 0));
+					vec.push_back(std::make_tuple(nstr, "", 0));
 				}
 				vec.push_back(std::make_tuple(str, fmt, 1));
 				i = n;
 			}
 		}
 		if (!nstr.empty()) {
-			vec.push_back(std::make_pair(nstr, "", 0));
+			vec.push_back(std::make_tuple(nstr, "",0));
+		}
+		static std::map<std::string, std::function<FormatItem::ptr(const std::string str)>> s_format_items = {
+#define XX(str,C) \	
+		(#str,[](const std::string& fmt){return FormatItem::ptr(new C(fmt));})
+
+		XX(m,MessageFormatItem),
+		XX(p, LevelFormatItem),
+		XX(r, ElapseFormatItem),
+		XX(m, NameFormatItem),
+		XX(m, NewLineFormatItem),
+		XX(m, LineFormatItem),
+		XX(m, StringFormatItem);
+#undef XX
+		};
+
+		for (auto& i : vec) {
+			if (std::get<2>(i) == 0)
+			{
+				m_items.push_back(FormatItem::ptr(new StringFormatItem(std::get<0>(i))));
+			}
+			else {
+				auto it = s_format_items.find(std::get<0>(i));
+				if (it == s_format_items.end()) {
+					m_items.push_back(FormatItem::ptr(new StringFormatItem("<<error_format %" + std::get<0>(i) + ">>")));
+				}
+				else {
+					m_items.push_back(it->second(std::get<1>(i)));
+				}
+			}
+			std::cout << std::get<0>(i) << " - " << std::get<1>(i) << " - " << std::get<2>(i) << std::endl;
+		}
+			
 		}
 	}
 
-	std::string LogFormatter::format(LogLevel::Level level,LogEvent::ptr event)
+	std::string LogFormatter::format(LogLevel::Level level, std::shared_ptr<Logger> logger,LogEvent::ptr event)
 	{
 		std::stringstream ss;
 		for (auto& i : m_item)
@@ -188,18 +221,5 @@ namespace sylar {
 		}
 		return ss.str();
 	}
-
-	class MessageFormatItem : public LogFormatter::FormatItem {
-	public:
-		void format(std::ostream& os, LogLevel::Level level, LogEvent::ptr event)override {
-			os << event->getConent();
-		}
-	};
-	class LevelFormatItem : public LogFormatter::FormatItem {
-	public:
-		void format(std::ostream& os, LogLevel::Level level,LogEvent::ptr event)override {
-			os << LogLevel::ToString(level);
-		}
-	};
 
 }
