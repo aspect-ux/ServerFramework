@@ -21,11 +21,22 @@
     <ClCompile Include="Makefile">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sylar\log.hpp">
+    <ClCompile Include="aspect\log.hpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="sylar\log.cpp">
+    <ClCompile Include="aspect\log.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="tests\test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="aspect\util.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aspect\util.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -142,9 +142,14 @@
     <Text Include="CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="aspect\util.cpp" />
     <ClCompile Include="Makefile" />
-    <ClCompile Include="sylar\log.cpp" />
-    <ClCompile Include="sylar\log.hpp" />
+    <ClCompile Include="aspect\log.cpp" />
+    <ClCompile Include="aspect\log.hpp" />
+    <ClCompile Include="tests\test.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="aspect\util.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
