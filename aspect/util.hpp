@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdint.h>
 namespace aspect {
-	pid_t GetTreadId();
+	pid_t GetThreadId();
 	uint32_t GetFiberId();
 }
 #endif

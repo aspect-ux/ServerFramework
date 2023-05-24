@@ -1,14 +1,16 @@
-#ifndef __ASPECT_LOG_H
-#define __ASPECT_LOG_H
+#ifndef __ASPECT_LOG_H__
+#define __ASPECT_LOG_H__
 
 #include <iostream>
-#include <string >
+#include <string>
 #include <stdint.h>
 #include <memory>
 #include <list>
 #include <sstream>
 #include <fstream>
 #include <vector>
+#include "singleton.hpp"
+#include "util.hpp"
 
 
 namespace aspect {
@@ -127,6 +129,7 @@ namespace aspect {
 
 		std::shared_ptr<Logger> getLogger() const { return m_logger; } //返回日志器
 		std::stringstream& getSS() { return m_ss; }
+		LogLevel::Level getLevel() const { return m_level; }
 
 	private:
 		const char* m_file = nullptr; //文件名
@@ -205,8 +208,20 @@ namespace aspect {
 
 		LogFormatter::ptr getFormatter() const { return m_formatter; }
 		void setFormatter(LogFormatter::ptr val) { m_formatter = val; }
+		/**
+		 * @brief 获取日志级别
+		 */
+		LogLevel::Level getLevel() const { return m_level; }
+
+		/**
+		 * @brief 设置日志级别
+		 */
+		void setLevel(LogLevel::Level val) { m_level = val; }
 	protected:
-		LogLevel::Level m_level;
+		LogLevel::Level m_level = LogLevel::DEBUG;
+		
+		//是否有格式器
+		bool m_hasFormatter = false;
 		// Mutex
 		//MutexType m_mutex;
 		LogFormatter::ptr m_formatter;
@@ -245,6 +260,7 @@ namespace aspect {
 		typedef std::shared_ptr<StdoutLogAppender> ptr;
 		void log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event) override;
 	};
+
 	// 输出到文件
 	class FileLogAppender : public LogAppender {
 	public:
@@ -298,6 +314,8 @@ namespace aspect {
 		Logger::ptr m_root;
 	};
 
+	// 日志器管理类单例模式
+	typedef aspect::Singleton<LoggerManager> LoggerMgr;
 	
 
 }

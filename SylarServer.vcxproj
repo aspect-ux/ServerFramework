@@ -72,6 +72,8 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
+    <IncludePath>D:\trial\github\ServerFramework\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
@@ -88,10 +90,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>D:\trial\github\ServerFramework\myLib\pthread\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>D:\trial\github\ServerFramework\myLib\pthread\lib\v110\Win32\Debug\dynamic\cdecl;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>libpthread.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -149,7 +154,16 @@
     <ClCompile Include="tests\test.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="aspect\fiber.hpp" />
+    <ClInclude Include="aspect\mutex.hpp" />
+    <ClInclude Include="aspect\noncopyable.hpp" />
+    <ClInclude Include="aspect\singleton.hpp" />
+    <ClInclude Include="aspect\thread.hpp" />
     <ClInclude Include="aspect\util.hpp" />
+    <ClInclude Include="lib\unistd.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libpthread.dll" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

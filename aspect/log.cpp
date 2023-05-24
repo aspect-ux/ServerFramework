@@ -153,7 +153,7 @@ namespace aspect {
 	}
 
 	LogEventWrap::~LogEventWrap() {
-		m_event->getLogger()->log(m_event->getLevel(), m_event);
+		m_event->getLogger()->Log(m_event->getLevel(), m_event);
 	}
 	LogEvent::LogEvent(const char* file, int32_t line, uint32_t elapse,
 		uint32_t thread_id, uint32_t fiber_id, uint64_t time) :m_file(file),
@@ -220,6 +220,7 @@ namespace aspect {
 	{
 
 	}
+
 	bool FileLogAppender::reopen()
 	{
 		if (m_filestream)
@@ -229,13 +230,17 @@ namespace aspect {
 		m_filestream.open(m_filename);
 		return !!m_filestream; // !!操作后，0依旧是0，其他都为1
 	}
+
 	void FileLogAppender::log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event) {
 		m_filestream << m_formatter->format(level,logger,event);
 	}
+
 	void LogAppender::log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event) {
 		std::cout << "std";
 	}
-	void StdoutLogAppender::log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event) {
+
+	void StdoutLogAppender::log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event)  
+	{
 		
 		if (level >= m_level) {
 			//MutexType::Lock lock(m_mutex);
@@ -255,6 +260,7 @@ namespace aspect {
 		}
 		return ss.str();
 	}
+
 	std::ostream& LogFormatter::format(std::ostream& ofs, std::shared_ptr<Logger> logger, LogLevel::Level level, LogEvent::ptr event) {
 		for (auto& i : m_items) {
 			i->format(ofs, logger, level, event);
