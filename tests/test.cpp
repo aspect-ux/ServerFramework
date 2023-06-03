@@ -7,6 +7,7 @@ int main(int argc,char** argv)
 {
 	//logger日志器
 	aspect::Logger::ptr logger(new aspect::Logger);
+	/*
 	//添加日志标准输出地appender
 	logger->addAppender(aspect::LogAppender::ptr(new aspect::StdoutLogAppender));
 
@@ -23,14 +24,14 @@ int main(int argc,char** argv)
 	//aspect::LogEvent::ptr event(new aspect::LogEvent(__FILE__, __LINE__, 0, std::this_thread()::get_id(), 2,time(0)));
 
 
-	ASPECT_LOG_INFO(logger) << "test macro";
-	ASPECT_LOG_ERROR(logger) << "test macro error";
+	//ASPECT_LOG_INFO(logger) << "test macro";
+	//ASPECT_LOG_ERROR(logger) << "test macro error";
 
 	//SASPECT_LOG_FMT_ERROR(logger, "test macro fmt error %s", "aa");
 
 	//auto l = aspect::LoggerMgr::GetInstance()->getLogger("xx");
 	//ASPECT_LOG_INFO(l) << "xxx";
-
+	*/
 	std::cout << "hello aspect log" << std::endl;
 	system("pause:");
 	return 0;

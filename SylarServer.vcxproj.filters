@@ -33,6 +33,9 @@
     <ClCompile Include="aspect\util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="include\coroutine.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="aspect\util.hpp">
@@ -53,7 +56,10 @@
     <ClInclude Include="aspect\mutex.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="aspect\fiber.hpp">
+    <ClInclude Include="include\coroutine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\unistd.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

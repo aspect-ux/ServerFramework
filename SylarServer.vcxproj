@@ -148,18 +148,20 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="aspect\util.cpp" />
+    <ClCompile Include="include\coroutine.cc" />
     <ClCompile Include="Makefile" />
     <ClCompile Include="aspect\log.cpp" />
     <ClCompile Include="aspect\log.hpp" />
     <ClCompile Include="tests\test.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="aspect\fiber.hpp" />
     <ClInclude Include="aspect\mutex.hpp" />
     <ClInclude Include="aspect\noncopyable.hpp" />
     <ClInclude Include="aspect\singleton.hpp" />
     <ClInclude Include="aspect\thread.hpp" />
     <ClInclude Include="aspect\util.hpp" />
+    <ClInclude Include="include\coroutine.h" />
+    <ClInclude Include="include\unistd.h" />
     <ClInclude Include="lib\unistd.h" />
   </ItemGroup>
   <ItemGroup>
