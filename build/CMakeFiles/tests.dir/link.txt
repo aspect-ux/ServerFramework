@@ -1,0 +1,1 @@
+/usr/bin/c++    -rdynamic -O3 -fPIC -ggdb -std=c++11 -Wall -Wno-deprecated -Werror -Wno-unused-function -Wno-builtin-macro-redefined -Wno-deprecated-declarations   CMakeFiles/tests.dir/tests/test.cc.o  -o ../bin/tests  -L/home/linno/Desktop/Project/AspectServer/lib ../lib/libaspect.so /usr/local/lib/libyaml-cpp.a -Wl,-rpath,/home/linno/Desktop/Project/AspectServer/lib 

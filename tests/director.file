@@ -1,0 +1,5 @@
+// 日志测试
+g++ -c ../aspect/util.cc -o util
+g++ -c ../aspect/log.cc -o log
+g++ -c test.cc -o test
+g++ test log util -o out
