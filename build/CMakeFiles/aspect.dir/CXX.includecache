@@ -19,6 +19,18 @@ yaml-cpp/yaml.h
 -
 aspect/log.h
 .././aspect/aspect/log.h
+list
+-
+vector
+-
+set
+-
+map
+-
+unordered_map
+-
+unordered_set
+-
 
 .././aspect/log.h
 iostream
