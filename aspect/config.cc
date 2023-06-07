@@ -8,7 +8,7 @@ namespace aspect {
 
     ConfigVarBase::ptr Config::LookupBase(const std::string& name) {
         auto it = s_datas.find(name);
-        return it == s_datas.find(name) ? nullptr : it->second;
+        return it == s_datas.end() ? nullptr : it->second;
     }
 
     static void ListAllMember(const std::string& prefix,
@@ -43,7 +43,7 @@ namespace aspect {
 
             if(var) {
                 if(i.second.IsScalar()) {
-                    var->fromString(i.second.Scalar());
+                    var->fromString(i.second.Scalar()); //写入m_val中
                 } else {
                     std::stringstream ss;
                     ss << i.second;

@@ -54,7 +54,7 @@ void test_yaml() {
 
     print_yaml(root,0);
 
-    ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << root;
+    //ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << root;
 }
 
 void test_config()
@@ -102,10 +102,97 @@ void test_config()
 
 }
 
+class Person {
+public:
+    std::string m_name;
+    int m_age = 0;
+    bool m_sex = 0;
+
+    std::string toString() const {
+        std::stringstream ss;
+        ss << "[Person name=" << m_name
+           << " age=" << m_age
+           << " sex=" << m_sex
+           << "]";
+        return ss.str();
+    }
+};
+
+aspect::ConfigVar<Person>::ptr g_person = 
+    aspect::Config::Lookup("class.person", Person(), "system person");
+
+aspect::ConfigVar<std::map<std::string,Person>>::ptr g_person_map = 
+    aspect::Config::Lookup("class.map", std::map<std::string,Person>(), "system person map");
+
+aspect::ConfigVar<std::map<std::string,std::vector<Person>>>::ptr g_person_vec_map = 
+    aspect::Config::Lookup("class.vec_map", std::map<std::string,std::vector<Person>>(), "system person vec_map");
+
+void test_class() {
+    ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << "before: " << g_person->getValue().toString() << " - " << g_person->toString();
+
+#define XX_PM(g_var, prefix) \
+    { \
+        auto m = g_person_map->getValue(); \
+        for (auto& i : m) {\
+            ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << prefix << ": " << i.first << " - " << " - " <<  \
+                i.second.toString(); \
+        } \
+        ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << prefix << ": size=" << m.size(); \
+    } 
+
+    XX_PM(g_person_map,"class.map before");
+    ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << "before: " << g_person_vec_map->toString();
+    
+    std::string path = "/home/linno/Desktop/Project/AspectServer/bin/conf/log.yml";
+    YAML::Node root = YAML::LoadFile(path);
+    aspect::Config::LoadFromYaml(root);
+
+    ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << "after: " << g_person->getValue().toString() << " - " << g_person->toString();
+    XX_PM(g_person_map,"class.map after");
+    ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << "after: " << g_person_vec_map->toString();
+}
+
+namespace aspect {
+/**
+ * @brief 读取yaml的Person:自定义类型
+*/
+//for Person
+template<>
+class LexicalCast<std::string,Person> {
+public: //c++ struct默认访问权限public,class默认为private
+    Person operator() (const std::string& v) {
+        YAML::Node node = YAML::Load(v);
+        Person p;
+        std::stringstream ss;
+        p.m_age = node["age"].as<int>();
+        p.m_name = node["name"].as<std::string>();
+        p.m_sex = node["sex"].as<bool>();
+        return p;
+    }
+};
+/**
+ * @brief 向yaml写入Person
+*/
+template<>
+class LexicalCast<Person,std::string> {
+public:
+     std::string operator() (const Person& p) {
+        YAML::Node node;
+        node["age"] = p.m_age;
+        node["name"] = p.m_name;
+        node["sex"] = p.m_sex;
+        std::stringstream ss;
+        ss << node;
+        return ss.str();
+    }
+};
+}
+
 int main(int argc,char** argv)
 {   
     //test_yaml();
-    test_config();
+    //test_config();
+    test_class();
 
     std::cout<<"hello aspect config!!!";
     return 0;

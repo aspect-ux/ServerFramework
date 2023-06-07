@@ -33,6 +33,7 @@ public:
 
     virtual std::string toString() = 0;
     virtual bool fromString(const std::string& val) = 0;
+    virtual std::string getTypeName() const = 0;
 protected:
     std::string m_name;
     std::string m_description;
@@ -278,18 +279,31 @@ public:
     }
     const T getValue() const {return m_val;}
     void setValue(const T& v) {m_val = v;}
+    std::string getTypeName() const override{return typeid(T).name();} 
 private:
     T m_val;
 };
 
 class Config {
 public:
-    typedef std::map<std::string,ConfigVarBase::ptr> ConfigVarMap;
+    typedef std::unordered_map<std::string,ConfigVarBase::ptr> ConfigVarMap;
 
     //typename用于确定声明的是一个类型，而不是变量
     template<class T>
     static typename ConfigVar<T>::ptr Lookup(const std::string& name,
     const T& default_value,const std::string& description = ""){
+        auto it = s_datas.find(name);
+        if (it != s_datas.end())
+        {
+            auto tmp = std::dynamic_pointer_cast<ConfigVar<T>>(it->second); //将基类指针转换成子类指针
+            if (tmp) {
+                ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << "Lookup name=" << name << " exists";
+            } else {
+                ASPECT_LOG_ERROR(ASPECT_LOG_ROOT()) << "Lookup name" << name << "exists but type not " << 
+                    typeid(T).name() << "real type=" << it->second->getTypeName();
+                return nullptr;
+            }
+        }
         auto tmp = Lookup<T>(name);
         if (tmp) {
             ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << "Lookup name=" << name << " exists";
