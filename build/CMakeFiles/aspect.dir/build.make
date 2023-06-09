@@ -63,15 +63,15 @@ include CMakeFiles/aspect.dir/flags.make
 CMakeFiles/aspect.dir/aspect/log.cc.o: CMakeFiles/aspect.dir/flags.make
 CMakeFiles/aspect.dir/aspect/log.cc.o: ../aspect/log.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/linno/Desktop/Project/AspectServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/aspect.dir/aspect/log.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aspect.dir/aspect/log.cc.o -c /home/linno/Desktop/Project/AspectServer/aspect/log.cc
+	/usr/bin/c++   $(CXX_DEFINES) -D__FILE__=\"aspect/log.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aspect.dir/aspect/log.cc.o -c /home/linno/Desktop/Project/AspectServer/aspect/log.cc
 
 CMakeFiles/aspect.dir/aspect/log.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aspect.dir/aspect/log.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/linno/Desktop/Project/AspectServer/aspect/log.cc > CMakeFiles/aspect.dir/aspect/log.cc.i
+	/usr/bin/c++  $(CXX_DEFINES) -D__FILE__=\"aspect/log.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/linno/Desktop/Project/AspectServer/aspect/log.cc > CMakeFiles/aspect.dir/aspect/log.cc.i
 
 CMakeFiles/aspect.dir/aspect/log.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aspect.dir/aspect/log.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/linno/Desktop/Project/AspectServer/aspect/log.cc -o CMakeFiles/aspect.dir/aspect/log.cc.s
+	/usr/bin/c++  $(CXX_DEFINES) -D__FILE__=\"aspect/log.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/linno/Desktop/Project/AspectServer/aspect/log.cc -o CMakeFiles/aspect.dir/aspect/log.cc.s
 
 CMakeFiles/aspect.dir/aspect/log.cc.o.requires:
 
@@ -87,15 +87,15 @@ CMakeFiles/aspect.dir/aspect/log.cc.o.provides.build: CMakeFiles/aspect.dir/aspe
 CMakeFiles/aspect.dir/aspect/util.cc.o: CMakeFiles/aspect.dir/flags.make
 CMakeFiles/aspect.dir/aspect/util.cc.o: ../aspect/util.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/linno/Desktop/Project/AspectServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/aspect.dir/aspect/util.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aspect.dir/aspect/util.cc.o -c /home/linno/Desktop/Project/AspectServer/aspect/util.cc
+	/usr/bin/c++   $(CXX_DEFINES) -D__FILE__=\"aspect/util.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aspect.dir/aspect/util.cc.o -c /home/linno/Desktop/Project/AspectServer/aspect/util.cc
 
 CMakeFiles/aspect.dir/aspect/util.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aspect.dir/aspect/util.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/linno/Desktop/Project/AspectServer/aspect/util.cc > CMakeFiles/aspect.dir/aspect/util.cc.i
+	/usr/bin/c++  $(CXX_DEFINES) -D__FILE__=\"aspect/util.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/linno/Desktop/Project/AspectServer/aspect/util.cc > CMakeFiles/aspect.dir/aspect/util.cc.i
 
 CMakeFiles/aspect.dir/aspect/util.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aspect.dir/aspect/util.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/linno/Desktop/Project/AspectServer/aspect/util.cc -o CMakeFiles/aspect.dir/aspect/util.cc.s
+	/usr/bin/c++  $(CXX_DEFINES) -D__FILE__=\"aspect/util.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/linno/Desktop/Project/AspectServer/aspect/util.cc -o CMakeFiles/aspect.dir/aspect/util.cc.s
 
 CMakeFiles/aspect.dir/aspect/util.cc.o.requires:
 
@@ -111,15 +111,15 @@ CMakeFiles/aspect.dir/aspect/util.cc.o.provides.build: CMakeFiles/aspect.dir/asp
 CMakeFiles/aspect.dir/aspect/config.cc.o: CMakeFiles/aspect.dir/flags.make
 CMakeFiles/aspect.dir/aspect/config.cc.o: ../aspect/config.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/linno/Desktop/Project/AspectServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/aspect.dir/aspect/config.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aspect.dir/aspect/config.cc.o -c /home/linno/Desktop/Project/AspectServer/aspect/config.cc
+	/usr/bin/c++   $(CXX_DEFINES) -D__FILE__=\"aspect/config.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aspect.dir/aspect/config.cc.o -c /home/linno/Desktop/Project/AspectServer/aspect/config.cc
 
 CMakeFiles/aspect.dir/aspect/config.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aspect.dir/aspect/config.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/linno/Desktop/Project/AspectServer/aspect/config.cc > CMakeFiles/aspect.dir/aspect/config.cc.i
+	/usr/bin/c++  $(CXX_DEFINES) -D__FILE__=\"aspect/config.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/linno/Desktop/Project/AspectServer/aspect/config.cc > CMakeFiles/aspect.dir/aspect/config.cc.i
 
 CMakeFiles/aspect.dir/aspect/config.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aspect.dir/aspect/config.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/linno/Desktop/Project/AspectServer/aspect/config.cc -o CMakeFiles/aspect.dir/aspect/config.cc.s
+	/usr/bin/c++  $(CXX_DEFINES) -D__FILE__=\"aspect/config.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/linno/Desktop/Project/AspectServer/aspect/config.cc -o CMakeFiles/aspect.dir/aspect/config.cc.s
 
 CMakeFiles/aspect.dir/aspect/config.cc.o.requires:
 
@@ -135,15 +135,15 @@ CMakeFiles/aspect.dir/aspect/config.cc.o.provides.build: CMakeFiles/aspect.dir/a
 CMakeFiles/aspect.dir/aspect/thread.cc.o: CMakeFiles/aspect.dir/flags.make
 CMakeFiles/aspect.dir/aspect/thread.cc.o: ../aspect/thread.cc
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/linno/Desktop/Project/AspectServer/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/aspect.dir/aspect/thread.cc.o"
-	/usr/bin/c++   $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aspect.dir/aspect/thread.cc.o -c /home/linno/Desktop/Project/AspectServer/aspect/thread.cc
+	/usr/bin/c++   $(CXX_DEFINES) -D__FILE__=\"aspect/thread.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/aspect.dir/aspect/thread.cc.o -c /home/linno/Desktop/Project/AspectServer/aspect/thread.cc
 
 CMakeFiles/aspect.dir/aspect/thread.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/aspect.dir/aspect/thread.cc.i"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/linno/Desktop/Project/AspectServer/aspect/thread.cc > CMakeFiles/aspect.dir/aspect/thread.cc.i
+	/usr/bin/c++  $(CXX_DEFINES) -D__FILE__=\"aspect/thread.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/linno/Desktop/Project/AspectServer/aspect/thread.cc > CMakeFiles/aspect.dir/aspect/thread.cc.i
 
 CMakeFiles/aspect.dir/aspect/thread.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/aspect.dir/aspect/thread.cc.s"
-	/usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/linno/Desktop/Project/AspectServer/aspect/thread.cc -o CMakeFiles/aspect.dir/aspect/thread.cc.s
+	/usr/bin/c++  $(CXX_DEFINES) -D__FILE__=\"aspect/thread.cc\" $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/linno/Desktop/Project/AspectServer/aspect/thread.cc -o CMakeFiles/aspect.dir/aspect/thread.cc.s
 
 CMakeFiles/aspect.dir/aspect/thread.cc.o.requires:
 

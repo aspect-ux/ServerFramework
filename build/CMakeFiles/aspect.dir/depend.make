@@ -8,6 +8,8 @@ CMakeFiles/aspect.dir/aspect/config.cc.o: .././aspect/thread.h
 CMakeFiles/aspect.dir/aspect/config.cc.o: .././aspect/util.h
 CMakeFiles/aspect.dir/aspect/config.cc.o: ../aspect/config.cc
 
+CMakeFiles/aspect.dir/aspect/log.cc.o: .././aspect/config.h
+CMakeFiles/aspect.dir/aspect/log.cc.o: .././aspect/log.h
 CMakeFiles/aspect.dir/aspect/log.cc.o: ../aspect/log.cc
 CMakeFiles/aspect.dir/aspect/log.cc.o: ../aspect/log.h
 CMakeFiles/aspect.dir/aspect/log.cc.o: ../aspect/singleton.h

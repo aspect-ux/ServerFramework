@@ -4,11 +4,11 @@ namespace aspect {
 
     static aspect::Logger::ptr g_logger = ASPECT_LOG_NAME("system");
 
-    Config::ConfigVarMap Config::s_datas;
+    //Config::ConfigVarMap Config::s_datas;
 
     ConfigVarBase::ptr Config::LookupBase(const std::string& name) {
-        auto it = s_datas.find(name);
-        return it == s_datas.end() ? nullptr : it->second;
+        auto it = GetData().find(name);
+        return it == GetData().end() ? nullptr : it->second;
     }
 
     static void ListAllMember(const std::string& prefix,

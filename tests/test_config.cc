@@ -49,7 +49,7 @@ void print_yaml(const YAML::Node& node, int level) {
     }
 }
 void test_yaml() {
-    std::string path = "/home/linno/Desktop/Project/AspectServer/bin/conf/log.yml";
+    std::string path = "/home/linno/Desktop/Project/AspectServer/bin/conf/test.yml";
     YAML::Node root = YAML::LoadFile(path);
 
     print_yaml(root,0);
@@ -87,7 +87,7 @@ void test_config()
     XX_M(g_str_int_map_value_config,str_int_map,before);
     XX_M(g_str_int_unordered_map_value_config,str_int_umap,before);
 
-    YAML::Node root = YAML::LoadFile("/home/linno/Desktop/Project/AspectServer/bin/conf/log.yml");
+    YAML::Node root = YAML::LoadFile("/home/linno/Desktop/Project/AspectServer/bin/conf/test.yml");
     aspect::Config::LoadFromYaml(root);
 
     ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << "after:" << g_int_value_config->getValue();
@@ -116,6 +116,12 @@ public:
            << "]";
         return ss.str();
     }
+
+    bool operator==(const Person& oth) const {
+        return m_name == oth.m_name
+            && m_age == oth.m_age
+            && m_sex == oth.m_sex;
+    }
 };
 
 aspect::ConfigVar<Person>::ptr g_person = 
@@ -140,10 +146,15 @@ void test_class() {
         ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << prefix << ": size=" << m.size(); \
     } 
 
+    g_person->addListener(10,[](const Person& old_value, const Person& new_value) {
+        ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << "old_value=" << old_value.toString() <<
+            " new_value=" << new_value.toString(); 
+    });
+
     XX_PM(g_person_map,"class.map before");
     ASPECT_LOG_INFO(ASPECT_LOG_ROOT()) << "before: " << g_person_vec_map->toString();
     
-    std::string path = "/home/linno/Desktop/Project/AspectServer/bin/conf/log.yml";
+    std::string path = "/home/linno/Desktop/Project/AspectServer/bin/conf/test.yml";
     YAML::Node root = YAML::LoadFile(path);
     aspect::Config::LoadFromYaml(root);
 
@@ -188,11 +199,30 @@ public:
 };
 }
 
+void test_log() {
+    static aspect::Logger::ptr system_log = ASPECT_LOG_NAME("system");
+    ASPECT_LOG_INFO(system_log) << "hello system" << std::endl;
+    std::cout << aspect::LoggerMgr::GetInstance()->toYamlString() << std::endl;
+
+    std::string path = "/home/linno/Desktop/Project/AspectServer/bin/conf/log.yml";
+    YAML::Node root = YAML::LoadFile(path);
+    aspect::Config::LoadFromYaml(root);
+
+    std::cout << "=============" << std::endl;
+    std::cout << aspect::LoggerMgr::GetInstance()->toYamlString() << std::endl;
+    std::cout << "=============" << std::endl;
+    std::cout << root << std::endl;
+    ASPECT_LOG_INFO(system_log) << "hello system" << std::endl;
+
+    system_log->setFormatter("%d - %m%n");
+    ASPECT_LOG_INFO(system_log) << "hello system" << std::endl;
+}
 int main(int argc,char** argv)
 {   
     //test_yaml();
     //test_config();
-    test_class();
+    //test_class();
+    test_log();
 
     std::cout<<"hello aspect config!!!";
     return 0;

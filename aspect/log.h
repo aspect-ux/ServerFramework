@@ -112,6 +112,7 @@ namespace aspect {
 		};
 
 		static const char* ToString(LogLevel::Level level);
+		static LogLevel::Level FromString(const std::string& str);
 	};
 
 	// 日志事件
@@ -197,9 +198,18 @@ namespace aspect {
 		};
 
 		void init();
+
+		bool isError() const {return m_error;}
+
+		/**
+		 * @brief 返回日志模板
+		 */
+		const std::string getPattern() const { return m_pattern;}
 	private:
 		std::string m_pattern;
 		std::vector<FormatItem::ptr> m_items;
+
+		bool m_error = false;
 	};
 	// 日志输出地,日志输出集合
 	class LogAppender
@@ -213,7 +223,12 @@ namespace aspect {
 		virtual void log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event) = 0; //纯虚函数
 
 		LogFormatter::ptr getFormatter() const { return m_formatter; }
-		void setFormatter(LogFormatter::ptr val) { m_formatter = val; }
+		
+		/**
+		 * @brief 更改日志格式器
+		 */
+		void setFormatter(LogFormatter::ptr val);
+
 		/**
 		 * @brief 获取日志级别
 		 */
@@ -223,6 +238,8 @@ namespace aspect {
 		 * @brief 设置日志级别
 		 */
 		void setLevel(LogLevel::Level val) { m_level = val; }
+
+		virtual std::string toYamlString() = 0;
 	protected:
 		LogLevel::Level m_level = LogLevel::DEBUG;
 		
@@ -249,11 +266,36 @@ namespace aspect {
 		void error(LogEvent::ptr event);
 		void fatal(LogEvent::ptr event);
 
+
+		/**
+		 * @brief 添加日志目标
+		 * @param[in] appender 日志目标
+		 */
 		void addAppender(LogAppender::ptr appender);
+
+		/**
+		 * @brief 删除日志目标
+		 * @param[in] appender 日志目标
+		 */
 		void delAppender(LogAppender::ptr appender);
+
+		/**
+		 * @brief 清空日志目标
+		 */
+		void clearAppenders();
+
 		LogLevel::Level getLevel() const { return m_level; }
 		void setLevel(LogLevel::Level val) { m_level = val; }
 		std::string getName()const { return m_name; }
+
+		void setFormatter(LogFormatter::ptr val);
+		void setFormatter(const std::string& val);
+		LogFormatter::ptr getFormatter();
+
+		/**
+		 * @brief 将日志器的配置转成YAML String
+		 */
+		std::string toYamlString();
 	private:
 		std::string m_name;						 //日志名称
 		LogLevel::Level m_level;				 //日志级别
@@ -267,6 +309,7 @@ namespace aspect {
 	public:
 		typedef std::shared_ptr<StdoutLogAppender> ptr;
 		void log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event) override;
+		std::string toYamlString() override;
 	};
 
 	// 输出到文件
@@ -277,6 +320,8 @@ namespace aspect {
 		virtual void log(LogLevel::Level level, std::shared_ptr<Logger> logger, LogEvent::ptr event);
 
 		bool reopen(); //重新打开文件，成功后返回true
+
+		std::string toYamlString() override;
 	private:
 		std::string m_filename;
 		std::ofstream m_filestream;

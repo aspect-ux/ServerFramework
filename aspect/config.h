@@ -13,6 +13,7 @@
 #include <map>
 #include <unordered_map>
 #include <unordered_set>
+#include <functional>
 
 namespace aspect{
     
@@ -250,6 +251,7 @@ template<class T,class FromStr = LexicalCast<std::string,T>,
 class ConfigVar : public ConfigVarBase{
 public:
     typedef std::shared_ptr<ConfigVar> ptr;
+    typedef std::function<void (const T& old_value, const T& new_value)> on_change_cb;
 
     ConfigVar(const std::string& name,
     const T& default_value,
@@ -278,10 +280,38 @@ public:
         return false;
     }
     const T getValue() const {return m_val;}
-    void setValue(const T& v) {m_val = v;}
+    void setValue(const T& v) {
+        // 在set的时候需要注意匹配自定义类型的操作符
+        if (v == m_val) {
+            return;
+        }
+        for (auto& i : m_cbs) {
+            i.second(m_val,v);
+        }
+        m_val = v;
+    }
     std::string getTypeName() const override{return typeid(T).name();} 
+
+    void addListener(uint64_t key, on_change_cb cb) {
+        m_cbs[key] = cb;
+    }
+
+    void delListener(uint64_t key) {
+        auto it = m_cbs.find(key);
+    }
+
+    on_change_cb getListener(uint64_t key) {
+        auto it = m_cbs.find(key);
+        return it == m_cbs.end() ? nullptr : it->second;
+    }
+
+    void clearListener() {
+        m_cbs.clear();
+    }
 private:
     T m_val;
+    //变更回调函数组，要求唯一，一般用hash
+    std::map<uint64_t, on_change_cb> m_cbs;
 };
 
 class Config {
@@ -292,8 +322,8 @@ public:
     template<class T>
     static typename ConfigVar<T>::ptr Lookup(const std::string& name,
     const T& default_value,const std::string& description = ""){
-        auto it = s_datas.find(name);
-        if (it != s_datas.end())
+        auto it = GetData().find(name);
+        if (it != GetData().end())
         {
             auto tmp = std::dynamic_pointer_cast<ConfigVar<T>>(it->second); //将基类指针转换成子类指针
             if (tmp) {
@@ -317,15 +347,15 @@ public:
             throw std::invalid_argument(name);
         }
         typename ConfigVar<T>::ptr v(new ConfigVar<T>(name,default_value,description));
-        s_datas[name] = v;
+        GetData()[name] = v;
         return v;
     }
 
     template<class T>
     static typename ConfigVar<T>::ptr Lookup(const std::string& name)
     {
-        auto it = s_datas.find(name);
-        if (it == s_datas.end()) {
+        auto it = GetData().find(name);
+        if (it == GetData().end()) {
             return nullptr;
         }
         return std::dynamic_pointer_cast<ConfigVar<T>>(it->second);
@@ -335,7 +365,14 @@ public:
 
     static ConfigVarBase::ptr LookupBase(const std::string& name); //纯虚类作为返回值会报错，这里返回指针
 private:
-    static ConfigVarMap s_datas;
+    // 不同static的初始化先后顺序不确定
+    // c在编译阶段，c++中由于对象的引入，当第一次调用全局或静态变量变量才构造初始化
+    // 而又因为s_datas要被调用，如果不先构造再调用，就会出问题
+    static ConfigVarMap& GetData() {
+        static ConfigVarMap s_datas;
+        return s_datas;
+    }
+    
 };
 
 }

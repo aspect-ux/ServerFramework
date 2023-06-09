@@ -31,6 +31,8 @@ unordered_map
 -
 unordered_set
 -
+functional
+-
 
 .././aspect/log.h
 iostream
@@ -95,6 +97,8 @@ functional
 -
 utility
 -
+aspect/config.h
+/home/linno/Desktop/Project/AspectServer/aspect/aspect/config.h
 
 /home/linno/Desktop/Project/AspectServer/aspect/log.h
 iostream
