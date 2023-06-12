@@ -65,6 +65,16 @@ memory
 .././aspect/thread.h
 string
 -
+thread
+-
+functional
+-
+memory
+-
+pthread.h
+-
+sys/types.h
+-
 
 .././aspect/util.h
 thread.h
@@ -129,11 +139,23 @@ memory
 -
 
 /home/linno/Desktop/Project/AspectServer/aspect/thread.cc
-thread.h
-/home/linno/Desktop/Project/AspectServer/aspect/thread.h
+aspect/thread.h
+/home/linno/Desktop/Project/AspectServer/aspect/aspect/thread.h
+aspect/log.h
+/home/linno/Desktop/Project/AspectServer/aspect/aspect/log.h
 
 /home/linno/Desktop/Project/AspectServer/aspect/thread.h
 string
+-
+thread
+-
+functional
+-
+memory
+-
+pthread.h
+-
+sys/types.h
 -
 
 /home/linno/Desktop/Project/AspectServer/aspect/util.cc

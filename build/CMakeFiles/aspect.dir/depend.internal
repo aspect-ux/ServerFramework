@@ -17,8 +17,11 @@ CMakeFiles/aspect.dir/aspect/log.cc.o
  /home/linno/Desktop/Project/AspectServer/aspect/thread.h
  /home/linno/Desktop/Project/AspectServer/aspect/util.h
 CMakeFiles/aspect.dir/aspect/thread.cc.o
+ .././aspect/log.h
+ .././aspect/singleton.h
+ .././aspect/thread.h
+ .././aspect/util.h
  /home/linno/Desktop/Project/AspectServer/aspect/thread.cc
- /home/linno/Desktop/Project/AspectServer/aspect/thread.h
 CMakeFiles/aspect.dir/aspect/util.cc.o
  /home/linno/Desktop/Project/AspectServer/aspect/log.h
  /home/linno/Desktop/Project/AspectServer/aspect/singleton.h

@@ -65,6 +65,16 @@ memory
 .././aspect/thread.h
 string
 -
+thread
+-
+functional
+-
+memory
+-
+pthread.h
+-
+sys/types.h
+-
 
 .././aspect/util.h
 thread.h

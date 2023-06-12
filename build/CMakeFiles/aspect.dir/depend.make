@@ -16,8 +16,11 @@ CMakeFiles/aspect.dir/aspect/log.cc.o: ../aspect/singleton.h
 CMakeFiles/aspect.dir/aspect/log.cc.o: ../aspect/thread.h
 CMakeFiles/aspect.dir/aspect/log.cc.o: ../aspect/util.h
 
+CMakeFiles/aspect.dir/aspect/thread.cc.o: .././aspect/log.h
+CMakeFiles/aspect.dir/aspect/thread.cc.o: .././aspect/singleton.h
+CMakeFiles/aspect.dir/aspect/thread.cc.o: .././aspect/thread.h
+CMakeFiles/aspect.dir/aspect/thread.cc.o: .././aspect/util.h
 CMakeFiles/aspect.dir/aspect/thread.cc.o: ../aspect/thread.cc
-CMakeFiles/aspect.dir/aspect/thread.cc.o: ../aspect/thread.h
 
 CMakeFiles/aspect.dir/aspect/util.cc.o: ../aspect/log.h
 CMakeFiles/aspect.dir/aspect/util.cc.o: ../aspect/singleton.h

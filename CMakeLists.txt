@@ -28,15 +28,29 @@ force_redefine_file_macro_for_sources(aspect) # 对__FILE__宏重定义输出相
 #add_library(aspect_static STATIC ${LIB_SRC})
 #SET_TARGET_PROPERTIES (aspect_static PROPERTIES OUTPUT_NAME "aspect")
 
+set(LIB_LIB
+    aspect
+    pthread
+    ${YAMLCPP}
+)
+
+#-------- log test part -----------
 add_executable(tests tests/test.cc) #test是内置关键字
 add_dependencies(tests aspect)
 force_redefine_file_macro_for_sources(tests) # __FILE__
-target_link_libraries(tests aspect ${YAMLCPP})
+target_link_libraries(tests ${LIB_LIB})
 
+#-------- config test part -----------
 add_executable(test_config tests/test_config.cc) #test是内置关键字
 add_dependencies(test_config aspect)
 force_redefine_file_macro_for_sources(test_config) # __FILE__
-target_link_libraries(test_config aspect ${YAMLCPP})
+target_link_libraries(test_config ${LIB_LIB})
+
+#-------- thread test part -----------
+add_executable(test_thread tests/test_thread.cc) #test是内置关键字
+add_dependencies(test_thread aspect)
+force_redefine_file_macro_for_sources(test_thread) # __FILE__
+target_link_libraries(test_thread ${LIB_LIB})
 
 SET(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin)
 SET(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib)
